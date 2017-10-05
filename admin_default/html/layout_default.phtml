@@ -16,8 +16,11 @@
 
     <script type="text/javascript" src="js/boxbilling.min.js?v={{guest.system_version}}"></script>
     <script type="text/javascript" src="js/bb-admin.js?v={{guest.system_version}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     {% block head %}{% endblock %}
+
 </head>
 
 <body>
@@ -148,5 +151,32 @@
         </div>
     </noscript>
 {% endif %}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.6.6/tinymce.min.js"></script>
+
+<script>
+    jQuery(document).ready(function($) {
+        tinymce.init({
+          selector: 'textarea[name="content"],textarea[name="signature"]',
+          setup: function (editor) {
+              editor.on('change', function () {
+                  editor.save();
+              });
+          },
+          height: 200,
+          menubar: false,
+          fontsize_formats: "8px 10px 12px 14px 18px 24px 36px",
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help'
+          ],
+          toolbar: ' insert | image | link | styleselect | fontsizeselect bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat '
+        });
+
+        $('textarea[name="content"]').after(`<p style="margin-left:10px;font-size: 12px;"><a href="https://uploadfiles.io" target="uploadfiles.io"><i class='fa fa-upload'> </i> Upload Files</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://dropbox.com" target="uploadfiles.io"><i class='fa fa-dropbox'> </i> Dropbox</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://drive.google.com" target="uploadfiles.io"><i class='fa fa-cloud-upload'> </i> Google Drive</a></p>`);
+    });
+</script>
+
 </body>
 </html>
